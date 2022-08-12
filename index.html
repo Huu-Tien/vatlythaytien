@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,104 +10,29 @@
 //     }, 10000);
 //   });
 // });
-var radio1 = 1;
-var radio2 = 1;
-var radio3 = 1;
-var radio4 = 1;
-var radio5 = 1;
 $(document).ready(function(){
   $("#run").click(function(){
-    var valRadio = $('input[name=height]:checked').val();
-    valRadio = Number(valRadio);
-    var time = 0;
-    var animation = 0;
-    switch (valRadio) {
-      case 1:
-        switch (radio1) {
-          case 1: time = 285; animation = 137; radio1++; break;
-          case 2: time = 286; animation = 137; radio1++; break;
-          case 3: time = 284; animation = 137; radio1++; break;
-          case 4: time = 285; animation = 137; radio1++; break;
-          case 5: time = 286; animation = 137; radio1 = 1; break;
-        }
-      break;
-      case 2:
-        switch (radio2) {
-          case 1: time = 349; animation = 177; radio2++; break;
-          case 2: time = 351; animation = 177; radio2++; break;
-          case 3: time = 348; animation = 177; radio2++; break;
-          case 4: time = 349; animation = 177; radio2++; break;
-          case 5: time = 350; animation = 177; radio2 = 1; break;
-        }
-      break;
-      case 3:
-        switch (radio3) {
-          case 1: time = 404; animation = 217; radio3++; break;
-          case 2: time = 405; animation = 217; radio3++; break;
-          case 3: time = 403; animation = 217; radio3++; break;
-          case 4: time = 404; animation = 217; radio3++; break;
-          case 5: time = 403; animation = 217; radio3 = 1; break;
-        }
-      break;
-      case 4:
-        switch (radio4) {
-          case 1: time = 451; animation = 257; radio4++; break;
-          case 2: time = 452; animation = 257; radio4++; break;
-          case 3: time = 452; animation = 257; radio4++; break;
-          case 4: time = 451; animation = 257; radio4++; break;
-          case 5: time = 450; animation = 257; radio4 = 1; break;
-        }
-      break;
-      case 5:
-        switch (radio5) {
-          case 1: time = 494; animation = 297; radio5++; break;
-          case 2: time = 495; animation = 297; radio5++; break;
-          case 3: time = 494; animation = 297; radio5++; break;
-          case 4: time = 494; animation = 297; radio5++; break;
-          case 5: time = 493; animation = 297; radio5 = 1; break;
-        }
-      break;
-
-    }
-    animation = animation + "px";
+  	var val = document.getElementById("data").value;
+  	time = Number(val) * 1000;
+  	val = val + "0" + "px";
   	$("#reset").prop('disabled', true);
   	$("#run").prop('disabled', true);
-   $("#trudien").animate({
-         top: animation
+   $("#test").animate({
+         top: val
      }, time);
    setTimeout(function() {
    $("#reset").prop('disabled', false);
-   time = "0" + time;
-   document.getElementById("time").innerHTML = time;
    }, time);
   });
 });
-
 $(document).ready(function(){
   $("#reset").click(function(){
-   $("#trudien").animate({
+   $("#test").animate({
          top: '0px'
      });
    $("#run").prop('disabled', false);
-   document.getElementById("time").innerHTML = "0000";
   });
 });
-
-function handleChange(src) {
-  var valanimation = 0;
-  var val = Number(src.value);
-  switch (val) {
-    case 1: valanimation = 0; break;
-    case 2: valanimation = 40; break;
-    case 3: valanimation = 80; break;
-    case 4: valanimation = 120; break;
-    case 5: valanimation = 160; break;
-  }
-  valanimation = valanimation + "px";
-  $("#congdien").animate({
-         top: valanimation
-     }, 0);
-}
 </script> 
 <style>
 img {
@@ -116,17 +40,20 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
-#trudien{
+#test{
 position:absolute;
 width:20;
 height:20;
 margin-top: 43px;
 margin-left: 73px;
 }
-#congdien{
+#test1{
 position:absolute;
-margin-top: 180px;
-margin-left:46px;
+width:20;
+height:20;
+z-index:0;
+left:45%;
+background:white
 }
 .parent{
 position:absolute;
@@ -136,7 +63,6 @@ z-index:0;
 left:45%;
 background:white;
 display: flex;
-margin-top: 40px;
 }
 #data{
 	text-align: right;
@@ -147,20 +73,6 @@ margin-top: 40px;
   animation-name: cssAnimation;
   animation-duration: 10s;
 }
-
-#time {
-  margin-left: 175px;
-  margin-top: 447px;
-  color: white;
-  background-color: red;
-  max-width: 38px;
-  min-width: 38px;
-  max-height: 14px;
-  min-height: 14px;
-  text-align: center;
-  padding-bottom: 3px;
-}
-
 @keyframes cssAnimation {
   from {top: 0px;}
   to {top: 400px;}
@@ -168,42 +80,19 @@ margin-top: 40px;
 </style>
 </head>
 <body>
-<div style="position: absolute; left: 51%">
-	<button id="run">Run</button>
-	<button id="reset" style="margin-left: 10px;">Reset</button>
+<div style="display: flex;">
+	<button id="run">Start Animation</button>
+	<button id="reset" style="margin-left: 10px;">reset</button>
+	<input type="text" name="input" id="data">
+	<div style="margin-left: 5px;">cm</div>
 </div>
 
 
 <div class="parent">
-	<div><img src="dai.PNG"></div>
-	<div id="trudien">
-		<img id="img" src="trudien.JPG">
+	<div><img src="dai.png"></div>
+	<div id="test">
+		<img id="img" src="trudien.jpg">
 	</div>
-  <div id="congdien">
-    <img id="img" style="width: 50px" src="congdien.PNG">
-  </div>
-  <div style="margin: 25px 0px 0px -330px; width: 61px;">
-    <p>Quãng Đường (m)</p>
-  </div>
-  <div style="margin: 180px 0px 0px -60px">
-    <input type="radio" name="height" value="1" checked="checked" onchange="handleChange(this);"> 0,4
-  </div>
-  <div style="margin: 220px 0px 0px -45px">
-    <input type="radio" name="height" value="2" onchange="handleChange(this);"> 0,6
-  </div>
-  <div style="margin: 260px 0px 0px -45px">
-    <input type="radio" name="height" value="3" onchange="handleChange(this);"> 0,8
-  </div>
-  <div style="margin: 300px 0px 0px -45px">
-    <input type="radio" name="height" value="4" onchange="handleChange(this);"> 1,0
-  </div>
-  <div style="margin: 340px 0px 0px -45px">
-    <input type="radio" name="height" value="5" onchange="handleChange(this);"> 1,2
-  </div>
-  <div>
-    <p id="time">0000</p>
-  </div>
-
 </div>
 
 <!-- <div id="test" style="background:#98bf21;height:100px;width:100px;position:absolute; position: relative; margin: 0 auto"></div> -->
